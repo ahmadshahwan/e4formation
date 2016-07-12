@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="com.cohorte.tech.rental.eap.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="com.cohorte.tech.rental.eap.window.main" label="Rental Application" width="500" height="400">
-    <children xsi:type="basic:Part" xmi:id="__pbXYEgvEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.part.rentalproperty" contributionURI="bundleclass://com.opcoach.training.rental.ui/com.opcoach.training.rental.ui.e4.views.RentalPropertyView" label="Rental Property" iconURI="platform:/plugin/com.opcoach.training.rental.ui/icons/Rentals.png"/>
+    <children xsi:type="basic:PartSashContainer" xmi:id="_K9ZDUEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.partsashcontainer.0" horizontal="true">
+      <children xsi:type="basic:PartStack" xmi:id="_bcQCcEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.partstack.0">
+        <children xsi:type="basic:Part" xmi:id="_My1iAEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.part.agencyview" contributionURI="bundleclass://com.opcoach.training.rental.ui/com.opcoach.training.rental.ui.e4.views.RentalAgencyView" label="Agency View" iconURI="platform:/plugin/com.opcoach.training.rental.ui/icons/Rentals.png"/>
+      </children>
+      <children xsi:type="basic:PartStack" xmi:id="_ca2_wEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.partstack.1">
+        <children xsi:type="basic:Part" xmi:id="__pbXYEgvEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.part.rentalproperty" contributionURI="bundleclass://com.opcoach.training.rental.ui/com.opcoach.training.rental.ui.e4.views.RentalPropertyView" label="Rental Property" iconURI="platform:/plugin/com.opcoach.training.rental.ui/icons/Rentals.png"/>
+      </children>
+    </children>
     <mainMenu xmi:id="_6wlLicgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.menu">
       <children xsi:type="menu:Menu" xmi:id="_6wlLisgZEeSyMNYR5xypkQ" elementId="file" label="File">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLi8gZEeSyMNYR5xypkQ" elementId="com.cohorte.tech.rental.eap.handleditem.file.open" label="Open" iconURI="platform:/plugin/com.cohorte.tech.rental.eap/icons/sample.png" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -45,4 +52,5 @@
   <addons xmi:id="_6wlLd8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_6wlLeMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
   <addons xmi:id="_gHhi8EhHEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.addon.0" contributionURI="bundleclass://com.opcoach.training.rental.ui/com.opcoach.training.rental.ui.RentalAddon"/>
+  <addons xmi:id="_6IOnkEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.addon.1" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.dndaddon.DnDAddon"/>
 </application:Application>
