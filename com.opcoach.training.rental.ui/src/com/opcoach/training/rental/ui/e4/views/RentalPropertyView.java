@@ -1,20 +1,18 @@
 package com.opcoach.training.rental.ui.e4.views;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.beans.PojoProperties;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.internal.databinding.conversion.DateToStringConverter;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
@@ -27,16 +25,10 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.ISelectionListener;
-import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.part.ViewPart;
 
 import com.opcoach.training.rental.Rental;
 import com.opcoach.training.rental.RentalAgency;
 import com.opcoach.training.rental.RentalPackage.Literals;
-import com.opcoach.training.rental.core.RentalCoreActivator;
 import com.opcoach.training.rental.ui.Messages;
 import com.opcoach.training.rental.ui.RentalUIActivator;
 import com.opcoach.training.rental.ui.RentalUIConstants;
@@ -53,6 +45,8 @@ public class RentalPropertyView
 
 	private Rental currentRental;
 	private Label customerTitle;
+	
+	@Inject private RentalAgency agency;
 
 
 	@PostConstruct
@@ -108,8 +102,6 @@ public class RentalPropertyView
 		endDateTitle.setText(Messages.RentalPropertyView_To);
 		endDateLabel = new Label(dateGroup, SWT.NONE);
 
-		// Fill with sample
-		RentalAgency agency = RentalCoreActivator.getAgency();
 		setRental(agency.getRentals().get(0));
 		m_bindingContext = initDataBindings();
 

@@ -35,8 +35,11 @@ public class RentalCoreActivator implements BundleActivator {
 
 	private static RentalAgency agency = RentalAgencyGenerator.createSampleAgency();
 
+	/**
+	 * @deprecated is injected now.
+	 * @return
+	 */
 	public static RentalAgency getAgency() {
 		return agency;
 	}
-
 }

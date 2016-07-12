@@ -5,6 +5,9 @@ Bundle-SymbolicName: com.opcoach.training.rental.ui;singleton:=true
 Bundle-Version: 1.0.1.qualifier
 Bundle-Activator: com.opcoach.training.rental.ui.RentalUIActivator
 Bundle-Vendor: OPCoach
+Export-Package: com.opcoach.training.rental.ui,
+ com.opcoach.training.rental.ui.pref,
+ com.opcoach.training.rental.ui.views
 Require-Bundle: com.opcoach.training.rental.core;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.core.expressions,
@@ -22,9 +25,9 @@ Require-Bundle: com.opcoach.training.rental.core;visibility:=reexport,
  com.ibm.icu;resolution:=optional,
  org.eclipse.rap.jface.databinding;resolution:=optional,
  org.eclipse.rap.rwt;resolution:=optional,
- org.eclipse.e4.ui.di
-Bundle-ActivationPolicy: lazy
-Export-Package: com.opcoach.training.rental.ui,
- com.opcoach.training.rental.ui.pref,
- com.opcoach.training.rental.ui.views
+ org.eclipse.e4.ui.di,
+ org.eclipse.e4.core.services,
+ org.eclipse.e4.core.contexts
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: javax.inject;version="1.0.0"
+Bundle-ActivationPolicy: lazy
