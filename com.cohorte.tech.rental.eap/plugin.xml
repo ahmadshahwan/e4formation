@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            name="com.cohorte.tech.rental.eap"
+            application="org.eclipse.e4.ui.workbench.swt.E4Application">
+         <property
+               name="lifeCycleURI"
+               value="bundleclass://com.cohorte.tech.rental.eap/com.cohorte.tech.rental.eap.E4LifeCycle">
+         </property>
+         <property
+               name="applicationCSS"
+               value="platform:/plugin/com.cohorte.tech.rental.eap/css/default.css">
+         </property>
+      </product>
+   </extension>
+
+</plugin>
