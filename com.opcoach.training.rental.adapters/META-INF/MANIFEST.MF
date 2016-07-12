@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Adapters
+Bundle-SymbolicName: com.opcoach.training.rental.adapters;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: OPCOACH
+Require-Bundle: org.eclipse.core.runtime,
+ com.opcoach.training.rental.core;bundle-version="1.0.0"
+Export-Package: com.opcoach.training.rental.adapters
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
