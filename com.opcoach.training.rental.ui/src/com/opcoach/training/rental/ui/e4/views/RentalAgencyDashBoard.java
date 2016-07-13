@@ -443,28 +443,30 @@ public class RentalAgencyDashBoard
 		customerViewer.getControl().setFocus();
 	}
 	
+	@Inject @Named(IServiceConstants.ACTIVE_PART) MPart activePart;
+	
 	@Inject @Optional
-	public void selectionChanged(@Named(IServiceConstants.ACTIVE_SELECTION) Customer c, @Named(IServiceConstants.ACTIVE_PART) MPart p) {
-		manageSelection(customerViewer, c, p);
+	public void selectionChanged(@Named(IServiceConstants.ACTIVE_SELECTION) Customer c) {
+		manageSelection(customerViewer, c);
 	}
 	
 	@Inject @Optional
-	public void selectionChanged(@Named(IServiceConstants.ACTIVE_SELECTION) Rental r, @Named(IServiceConstants.ACTIVE_PART) MPart p) {
+	public void selectionChanged(@Named(IServiceConstants.ACTIVE_SELECTION) Rental r) {
 		if (r != null) {
-			manageSelection(rentalViewer, r, p);
-			manageSelection(customerViewer, r.getCustomer(), p);
-			manageSelection(objectViewer, r.getRentedObject(), p);
+			manageSelection(rentalViewer, r);
+			manageSelection(customerViewer, r.getCustomer());
+			manageSelection(objectViewer, r.getRentedObject());
 		}
 	}
 	
 	@Inject @Optional
-	public void selectionChanged(@Named(IServiceConstants.ACTIVE_SELECTION) RentalObject o, @Named(IServiceConstants.ACTIVE_PART) MPart p) {
-		manageSelection(objectViewer, o, p);
+	public void selectionChanged(@Named(IServiceConstants.ACTIVE_SELECTION) RentalObject o) {
+		manageSelection(objectViewer, o);
 	}
 	
-	private void manageSelection(Viewer v, Object obj, MPart part) {
-		if (v == null || obj == null || part == null) return;
-		if (!VIEW_ID.equals(part.getElementId())) {
+	private void manageSelection(Viewer v, Object obj) {
+		if (v == null || obj == null || activePart == null) return;
+		if (!VIEW_ID.equals(activePart.getElementId())) {
 			v.setSelection(new StructuredSelection(obj));
 		}
 	}
