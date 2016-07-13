@@ -27,7 +27,10 @@ Require-Bundle: com.opcoach.training.rental.core;visibility:=reexport,
  org.eclipse.rap.rwt;resolution:=optional,
  org.eclipse.e4.ui.di,
  org.eclipse.e4.core.services,
- org.eclipse.e4.core.contexts
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+ org.eclipse.e4.core.contexts,
+ org.eclipse.e4.ui.workbench,
+ org.eclipse.e4.core.di.annotations,
+ org.eclipse.e4.ui.services
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.inject;version="1.0.0"
 Bundle-ActivationPolicy: lazy

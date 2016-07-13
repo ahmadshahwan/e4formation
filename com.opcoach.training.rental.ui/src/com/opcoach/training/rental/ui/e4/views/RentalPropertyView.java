@@ -2,13 +2,16 @@ package com.opcoach.training.rental.ui.e4.views;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.beans.PojoProperties;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.internal.databinding.conversion.DateToStringConverter;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
@@ -135,56 +138,18 @@ public class RentalPropertyView
 
 	}
 
-	// E34 verfier portage des selection listener.
-//	@Override
-//	public void init(IViewSite site) throws PartInitException
-//	{
-//		super.init(site);
-//		site.getPage().addSelectionListener(this);
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
-//	 */
-//	@Override
-//	public void dispose()
-//	{
-//		getSite().getPage().removeSelectionListener(this);
-//		super.dispose();
-//	}
+	@Inject @Optional
+	public void receiveSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Rental r) {
+		if (rentedObjectLabel != null) {
+			setRental(r);
+		}
+	}
 
 	@Focus
 	public void setFocus()
 	{
 
 	}
-
-	// E34 revoir le code de la selection
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.
-//	 * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
-//	 */
-//	@Override
-//	public void selectionChanged(IWorkbenchPart part, ISelection selection)
-//	{
-//		if (selection.isEmpty())
-//			return;
-//
-//		if (selection instanceof IStructuredSelection)
-//		{
-//			Object sel = ((IStructuredSelection) selection).getFirstElement();
-//
-//			// La selection courante est elle un Rental ou adaptable en Rental ?
-//			Rental r = (Rental) Platform.getAdapterManager().getAdapter(sel, Rental.class);
-//			setRental(r);
-//
-//		}
-//
-//	}
 
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();

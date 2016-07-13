@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
@@ -50,6 +55,9 @@ public class RentalAgencyView implements RentalUIConstants
 	{
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Inject
+	private ESelectionService selectionService;
 
 	@PostConstruct
 	public void createPartControl(Composite parent)
@@ -109,8 +117,10 @@ public class RentalAgencyView implements RentalUIConstants
 		agencyViewer.setInput(agencies);
 
 		// Association de la vue sur un contexte d'aide
-		PlatformUI.getWorkbench().getHelpSystem()
-				.setHelp(agencyViewer.getControl(), "com.opcoach.training.rental.ui.rentalContext");
+		
+		// E34 voir la gestion de help dans E4
+//		PlatformUI.getWorkbench().getHelpSystem()
+//				.setHelp(agencyViewer.getControl(), "com.opcoach.training.rental.ui.rentalContext");
 
 		// Autorise le popup sur le treeviewer
 		// E34 revoir la gestion du popup menu
@@ -125,8 +135,14 @@ public class RentalAgencyView implements RentalUIConstants
 		ds.setTransfer(ts);
 		ds.addDragListener(new AgencyTreeDragSourceListener(agencyViewer));
 		
-		// E34 voir pour que l arbre soit get selection provider
-//		getSite().setSelectionProvider(agencyViewer);
+		agencyViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection sel = (IStructuredSelection) event.getSelection();
+				selectionService.setSelection(sel.size() == 1 ? sel.getFirstElement() : sel.toArray());				
+			}
+		});
 
 	}
 
