@@ -11,11 +11,17 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.e4.core.contexts.EclipseContextFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 
@@ -23,7 +29,7 @@ import org.osgi.framework.FrameworkUtil;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class RentalUIActivator extends AbstractUIPlugin implements  RentalUIConstants
+public class RentalUIActivator implements  BundleActivator, RentalUIConstants
 {
 
 	
@@ -35,6 +41,8 @@ public class RentalUIActivator extends AbstractUIPlugin implements  RentalUICons
 
 	/** The map of possible color providers (read in extensions) */
 	private Map<String, Palette> paletteManager = new HashMap<String, Palette>();
+
+	private IPreferenceStore preferenceStore;
 
 	/**
 	 * The constructor
@@ -50,11 +58,24 @@ public class RentalUIActivator extends AbstractUIPlugin implements  RentalUICons
 	 */
 	public void start(BundleContext context) throws Exception
 	{
-		super.start(context); 
 		plugin = this;
 		System.out.println("Start rental ui bundle");
 		readViewExtensions();
 		readColorProviderExtensions();
+		
+		// Init image reg
+		ImageRegistry reg = null;
+		Bundle e4Bundel = Platform.getBundle("org.eclipse.e4.ui.workbench");
+		if (e4Bundel != null) {
+			BundleContext osgiContext = e4Bundel.getBundleContext();
+			IEclipseContext e4Context = EclipseContextFactory.getServiceContext(osgiContext);
+			reg = e4Context.get(ImageRegistry.class);
+			if (reg == null) {
+				reg = new ImageRegistry();
+				e4Context.set(ImageRegistry.class, reg);
+			}
+			initializeImageRegistry(reg);
+		}
 		// initializeFontRegistry();
 				
 	}
@@ -100,7 +121,8 @@ public class RentalUIActivator extends AbstractUIPlugin implements  RentalUICons
 				{
 					IStatus st = new Status(IStatus.ERROR, PLUGIN_ID, "Impossible de creer la classe de palette : "+
 				                  elt.getAttribute("paletteClass"),e);
-					getLog().log(st);
+					// E34 voir les log
+					// getLog().log(st);
 					
 				}
 			}
@@ -136,7 +158,6 @@ public class RentalUIActivator extends AbstractUIPlugin implements  RentalUICons
 	public void stop(BundleContext context) throws Exception
 	{
 		plugin = null;
-		super.stop(context);
 	}
 
 	/**
@@ -150,8 +171,6 @@ public class RentalUIActivator extends AbstractUIPlugin implements  RentalUICons
 	}
 
 
-
-	@Override
 	protected void initializeImageRegistry(ImageRegistry reg)
 	{
 		Bundle b = FrameworkUtil.getBundle(getClass());
@@ -165,5 +184,14 @@ public class RentalUIActivator extends AbstractUIPlugin implements  RentalUICons
 		reg.put(IMG_EXPAND_ALL, ImageDescriptor.createFromURL(b.getEntry(IMG_EXPAND_ALL)));
 
 	}
+	
+    public IPreferenceStore getPreferenceStore() {
+        // Create the preference store lazily.
+        if (preferenceStore == null) {
+			preferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, FrameworkUtil.getBundle(this.getClass()).getSymbolicName());
+
+        }
+        return preferenceStore;
+    }
 	
 }

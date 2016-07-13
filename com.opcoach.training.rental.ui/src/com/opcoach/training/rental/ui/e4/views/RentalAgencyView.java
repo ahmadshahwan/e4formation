@@ -8,10 +8,7 @@ import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -29,16 +26,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 
 import com.opcoach.training.rental.RentalAgency;
 import com.opcoach.training.rental.core.RentalCoreActivator;
 import com.opcoach.training.rental.helpers.RentalAgencyGenerator;
-import com.opcoach.training.rental.ui.RentalUIActivator;
 import com.opcoach.training.rental.ui.RentalUIConstants;
 import com.opcoach.training.rental.ui.views.AgencyTreeDragSourceListener;
 import com.opcoach.training.rental.ui.views.RentalProvider;
@@ -60,13 +51,12 @@ public class RentalAgencyView implements RentalUIConstants
 	private ESelectionService selectionService;
 
 	@PostConstruct
-	public void createPartControl(Composite parent)
+	public void createPartControl(Composite parent, ImageRegistry imgReg)
 	{
 		parent.setLayout(new GridLayout(1, false));
 
 		final Composite comp = new Composite(parent, SWT.NONE);
 		comp.setLayout(new GridLayout(2, false));
-		ImageRegistry imgReg = RentalUIActivator.getDefault().getImageRegistry();
 		Button expandAll = new Button(comp, SWT.FLAT);
 		expandAll.setImage(imgReg.get(IMG_EXPAND_ALL));
 		expandAll.setToolTipText("Expand agency tree");
@@ -103,7 +93,7 @@ public class RentalAgencyView implements RentalUIConstants
 
 		agencyViewer = new TreeViewer(parent);
 		agencyViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,true));
-		provider = new RentalProvider();
+		provider = new RentalProvider(imgReg);
 		agencyViewer.setContentProvider(provider);
 		agencyViewer.setLabelProvider(provider);
 
@@ -133,7 +123,8 @@ public class RentalAgencyView implements RentalUIConstants
 		DragSource ds = new DragSource(agencyViewer.getControl(), DND.DROP_COPY);
 		Transfer[] ts = new Transfer[] { TextTransfer.getInstance(), RTFTransfer.getInstance(), URLTransfer.getInstance() };
 		ds.setTransfer(ts);
-		ds.addDragListener(new AgencyTreeDragSourceListener(agencyViewer));
+		AgencyTreeDragSourceListener treeListener = new AgencyTreeDragSourceListener(agencyViewer, imgReg);
+		ds.addDragListener(treeListener);
 		
 		agencyViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			

@@ -16,6 +16,7 @@ import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
@@ -53,7 +54,7 @@ public class RentalPropertyView
 
 
 	@PostConstruct
-	public void createPartControl(Composite parent)
+	public void createPartControl(Composite parent, ImageRegistry imgReg)
 	{
 		parent.setLayout(new GridLayout(1, false));
 
@@ -83,7 +84,7 @@ public class RentalPropertyView
 				@Override
 				public void dragStart(DragSourceEvent event)
 				{
-					event.image = RentalUIActivator.getDefault().getImageRegistry().get(RentalUIConstants.IMG_AGENCY);
+					event.image = imgReg.get(RentalUIConstants.IMG_AGENCY);
 				}
 
 			});

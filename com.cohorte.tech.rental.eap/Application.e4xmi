@@ -3,11 +3,16 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="com.cohorte.tech.rental.eap.window.main" selectedElement="_tgnQQEjREeaQzqN2d3cD7Q" label="Rental Application" iconURI="platform:/plugin/com.opcoach.training.rental.ui/icons/Agency.png" width="700" height="600">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_tgnQQEjREeaQzqN2d3cD7Q" elementId="com.cohorte.tech.rental.eap.perspectivestack.0" selectedElement="_uckiMEjREeaQzqN2d3cD7Q">
       <children xsi:type="advanced:Perspective" xmi:id="_uckiMEjREeaQzqN2d3cD7Q" elementId="com.cohorte.tech.rental.eap.perspective.0" accessibilityPhrase="Main">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_K9ZDUEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.partsashcontainer.0" selectedElement="_bcQCcEhOEeaSqexOxh0qjQ" horizontal="true">
-          <children xsi:type="basic:PartStack" xmi:id="_ca2_wEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.partstack.1" containerData="40">
-            <children xsi:type="advanced:Placeholder" xmi:id="_wRyz4EjQEeaQzqN2d3cD7Q" elementId="com.cohorte.tech.rental.eap.placeholder.1" ref="__pbXYEgvEeaSqexOxh0qjQ"/>
+        <children xsi:type="basic:PartSashContainer" xmi:id="_K9ZDUEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.partsashcontainer.0" selectedElement="_kukK0EjcEeaQzqN2d3cD7Q">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_kukK0EjcEeaQzqN2d3cD7Q" elementId="com.cohorte.tech.rental.eap.partsashcontainer.1" horizontal="true">
+            <children xsi:type="basic:PartStack" xmi:id="_ca2_wEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.partstack.1" containerData="">
+              <children xsi:type="advanced:Placeholder" xmi:id="_wRyz4EjQEeaQzqN2d3cD7Q" elementId="com.cohorte.tech.rental.eap.placeholder.1" ref="__pbXYEgvEeaSqexOxh0qjQ"/>
+            </children>
+            <children xsi:type="basic:PartStack" xmi:id="_rqZUgEjcEeaQzqN2d3cD7Q" elementId="com.cohorte.tech.rental.eap.partstack.2">
+              <children xsi:type="basic:Part" xmi:id="_sNs14EjcEeaQzqN2d3cD7Q" elementId="com.cohorte.tech.rental.eap.part.dashboard" contributionURI="bundleclass://com.opcoach.training.rental.ui/com.opcoach.training.rental.ui.e4.views.RentalAgencyDashBoard" label="Dashboard"/>
+            </children>
           </children>
-          <children xsi:type="basic:PartStack" xmi:id="_bcQCcEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.partstack.0" containerData="60">
+          <children xsi:type="basic:PartStack" xmi:id="_bcQCcEhOEeaSqexOxh0qjQ" elementId="com.cohorte.tech.rental.eap.partstack.0" containerData="">
             <children xsi:type="advanced:Placeholder" xmi:id="_tfRo8EjQEeaQzqN2d3cD7Q" elementId="com.cohorte.tech.rental.eap.placeholder.0" ref="_My1iAEhOEeaSqexOxh0qjQ"/>
           </children>
         </children>

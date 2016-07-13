@@ -1,5 +1,8 @@
 package com.opcoach.training.rental.ui.views;
 
+import javax.inject.Inject;
+
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -17,11 +20,14 @@ import com.opcoach.training.rental.ui.RentalUIConstants;
 final public class AgencyTreeDragSourceListener extends DragSourceAdapter
 {
 	private ISelectionProvider selProvider = null;
-
-	public AgencyTreeDragSourceListener(ISelectionProvider selProvider)
+	
+	private ImageRegistry reg;
+	
+	public AgencyTreeDragSourceListener(ISelectionProvider selProvider, final ImageRegistry reg)
 	{
 		super();
 		this.selProvider = selProvider;
+		this.reg = reg;
 	}
 
 	@Override
@@ -35,7 +41,7 @@ final public class AgencyTreeDragSourceListener extends DragSourceAdapter
 		if (ImageTransfer.getInstance().isSupportedType(event.dataType))
 		{
 			if (selectedObject instanceof Customer)
-				event.data = RentalUIActivator.getDefault().getImageRegistry().get(RentalUIConstants.IMG_CUSTOMER);
+				event.data = this.reg.get(RentalUIConstants.IMG_CUSTOMER);
 			else
 				event.data = null;
 		}

@@ -27,13 +27,16 @@ public class RentalProvider extends LabelProvider
 {
 
 	private static final Object[] EMPTY_RESULT = new Object[0];
+	
+	private ImageRegistry imgReg;
 
 	/** The choosen palette among the additional (may be null) */
 	private Palette currentPalette;
 
-	public RentalProvider()
+	public RentalProvider(ImageRegistry imgReg)
 	{
 		initPalette();
+		this.imgReg = imgReg;
 	}
 
 	@Override
@@ -128,7 +131,7 @@ public class RentalProvider extends LabelProvider
 	public Image getImage(Object element)
 	{
 		Image result = null;
-		ImageRegistry reg = RentalUIActivator.getDefault().getImageRegistry();
+		ImageRegistry reg = this.imgReg;
 
 		if (element instanceof RentalAgency)
 		{
@@ -203,7 +206,7 @@ public class RentalProvider extends LabelProvider
 
 		public Image getImage()
 		{
-			ImageRegistry reg = RentalUIActivator.getDefault().getImageRegistry();
+			ImageRegistry reg = imgReg;
 
 			if (name == RENTALS_NODE)
 			{
