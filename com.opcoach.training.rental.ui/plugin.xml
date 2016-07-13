@@ -151,6 +151,12 @@
             </instanceof>
          </iterate>
       </definition>
+      <definition
+            id="com.opcoach.training.rental.ui.e4.customerSelected">
+         <instanceof
+               value="com.opcoach.training.rental.Customer">
+         </instanceof>
+      </definition>
    </extension>
    <extension
          point="org.eclipse.ui.activities">

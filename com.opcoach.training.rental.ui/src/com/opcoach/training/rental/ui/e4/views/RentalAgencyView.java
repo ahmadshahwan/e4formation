@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -36,6 +37,8 @@ import com.opcoach.training.rental.ui.views.RentalProvider;
 
 public class RentalAgencyView implements RentalUIConstants
 {
+	private static final String AGENCY_POP_UP_MENU_ID = "com.cohorte.tech.rental.eap.popupmenu.rental.popup";
+
 	public static final String VIEW_ID = "com.opcoach.rental.ui.rentalagencyview";
 
 	private TreeViewer agencyViewer;
@@ -51,7 +54,7 @@ public class RentalAgencyView implements RentalUIConstants
 	private ESelectionService selectionService;
 
 	@PostConstruct
-	public void createPartControl(Composite parent, ImageRegistry imgReg)
+	public void createPartControl(Composite parent, ImageRegistry imgReg, EMenuService menuServices)
 	{
 		parent.setLayout(new GridLayout(1, false));
 
@@ -107,12 +110,10 @@ public class RentalAgencyView implements RentalUIConstants
 		agencyViewer.setInput(agencies);
 
 		// Association de la vue sur un contexte d'aide
-		
-		// E34 voir la gestion de help dans E4
-//		PlatformUI.getWorkbench().getHelpSystem()
-//				.setHelp(agencyViewer.getControl(), "com.opcoach.training.rental.ui.rentalContext");
+		menuServices.registerContextMenu(agencyViewer.getControl(), AGENCY_POP_UP_MENU_ID);
 
 		// Autorise le popup sur le treeviewer
+		
 		// E34 revoir la gestion du popup menu
 //		MenuManager menuManager = new MenuManager();
 //		Menu menu = menuManager.createContextMenu(agencyViewer.getControl());

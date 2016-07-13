@@ -6,6 +6,7 @@ Bundle-Version: 1.0.1.qualifier
 Bundle-Activator: com.opcoach.training.rental.ui.RentalUIActivator
 Bundle-Vendor: OPCoach
 Export-Package: com.opcoach.training.rental.ui,
+ com.opcoach.training.rental.ui.e4.commands,
  com.opcoach.training.rental.ui.pref,
  com.opcoach.training.rental.ui.views
 Require-Bundle: com.opcoach.training.rental.core;visibility:=reexport,
