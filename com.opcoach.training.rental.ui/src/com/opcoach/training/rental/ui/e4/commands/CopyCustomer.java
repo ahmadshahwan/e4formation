@@ -1,10 +1,12 @@
 package com.opcoach.training.rental.ui.e4.commands;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.RTFTransfer;
@@ -24,7 +26,7 @@ public class CopyCustomer
 	}
 
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) Customer c, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) 
+	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) Customer c, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, EventBroker broker) 
 	{
 		MessageDialog.openInformation(shell,
 				"Copy Client",
@@ -38,6 +40,8 @@ public class CopyCustomer
 		Object[] data = new Object[] {textData, rtfData};
 		clipboard.setContents(data, transfers);
 		clipboard.dispose();
+		
+		broker.post("agency/copy", c);
 	}
 
 }

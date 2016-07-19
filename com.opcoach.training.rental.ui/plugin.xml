@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.4"?>
 <plugin>
+
    <extension-point id="Palette" name="Palette" schema="schema/Palette.exsd"/>
+
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
+            name="Palettes"
             category="com.opcoach.training.rental.preferences"
             class="com.opcoach.training.rental.ui.pref.RentalColorPreferences"
-            id="com.opcoach.rental.ui.colorprefpage"
-            name="Palettes">
+            id="com.opcoach.rental.ui.colorprefpage">
       </page>
       <page
+            name="Rental"
             class="com.opcoach.training.rental.ui.pref.RentalPrefHomePage"
-            id="com.opcoach.training.rental.preferences"
-            name="Rental">
+            id="com.opcoach.training.rental.preferences">
       </page>
       <page
+            name="Default Palette"
             category="com.opcoach.rental.ui.colorprefpage"
             class="com.opcoach.training.rental.ui.pref.DefaultPalettePreferences"
-            id="com.opcoach.training.rental.ui.pageforDefaultPalette"
-            name="Default Palette">
+            id="com.opcoach.training.rental.ui.pageforDefaultPalette">
       </page>
    </extension>
-
-   <extension   point="org.eclipse.ui.views">
-      <category name="Rental"  id="com.opcoach.rental.ui"/>
-      
-      
-      
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Rental"
+            id="com.opcoach.rental.ui">
+      </category>
       <view
+            name="Customer Propertie"
+            icon="icons/Customers.png"
             category="com.opcoach.rental.ui"
             class="com.opcoach.training.rental.ui.views.CustomerViewPart"
-            icon="icons/Customers.png"
-            id="com.opcoach.training.rental.ui.views.CustomerViewPart"
-            name="Customer Propertie">
+            id="com.opcoach.training.rental.ui.views.CustomerViewPart">
       </view>
    </extension>
    <extension
@@ -42,24 +43,22 @@
             class="com.opcoach.training.rental.ui.pref.RentalPrefInit">
       </initializer>
    </extension>
-   
- 
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
             targetID="org.eclipse.ui.resourcePerspective">
          <view
-               id="com.opcoach.rental.ui.rentalagencyview"
                minimized="false"
-               relationship="stack"
                relative="org.eclipse.ui.views.ResourceNavigator"
-               visible="true">
+               visible="true"
+               id="com.opcoach.rental.ui.rentalagencyview"
+               relationship="stack">
          </view>
          <view
-               id="com.opcoach.rental.ui.views.rentalView"
                minimized="false"
-               relationship="stack"
-               relative="org.eclipse.ui.views.ResourceNavigator">
+               relative="org.eclipse.ui.views.ResourceNavigator"
+               id="com.opcoach.rental.ui.views.rentalView"
+               relationship="stack">
          </view>
          <perspectiveShortcut
                id="com.opcoach.training.rental.ui.rentalperspective">
@@ -72,32 +71,30 @@
          </viewShortcut>
       </perspectiveExtension>
    </extension>
-   
-   
-      <extension
+   <extension
          point="org.eclipse.ui.commands">
       <command
-            id="com.opcoach.training.rental.ui.commands.MaCommande"
-            name="My Command">
+            name="My Command"
+            id="com.opcoach.training.rental.ui.commands.MaCommande">
          <state
                class="org.eclipse.ui.handlers.RegistryToggleState:true"
                id="org.eclipse.ui.commands.toggleState">
          </state>
       </command>
       <command
-            id="com.opcoach.training.rental.ui.sampleJobCommand"
-            name="Launch Sample Job">
+            name="Launch Sample Job"
+            id="com.opcoach.training.rental.ui.sampleJobCommand">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.opcoach.training.rental.ui.handlers.SampleCommandHandler"
-            commandId="com.opcoach.training.rental.ui.commands.MaCommande">
+            commandId="com.opcoach.training.rental.ui.commands.MaCommande"
+            class="com.opcoach.training.rental.ui.handlers.SampleCommandHandler">
       </handler>
       <handler
-            class="com.opcoach.training.rental.ui.handlers.JobLauncherHandler"
-            commandId="com.opcoach.training.rental.ui.sampleJobCommand">
+            commandId="com.opcoach.training.rental.ui.sampleJobCommand"
+            class="com.opcoach.training.rental.ui.handlers.JobLauncherHandler">
       </handler>
    </extension>
    <extension
@@ -109,13 +106,12 @@
                label="My Menu">
             <command
                   commandId="com.opcoach.training.rental.ui.commands.MaCommande"
-                  icon="icons/Agency.png"
                   label="%command.label"
+                  icon="icons/Agency.png"
                   style="push">
             </command>
          </menu>
       </menuContribution>
-      <!-- Ajout d'un menu dans le main menu -->
       <menuContribution
             allPopups="false"
             locationURI="menu:org.eclipse.ui.main.menu?after=additions">
@@ -161,24 +157,31 @@
    <extension
          point="org.eclipse.ui.activities">
       <activity
-            id="com.opcoach.training.rental.ui.commands.activity1"
-            name="%activity.name">
-         <enabledWhen></enabledWhen>
+            name="%activity.name"
+            id="com.opcoach.training.rental.ui.commands.activity1">
+         <enabledWhen>
+         </enabledWhen>
       </activity>
    </extension>
    <extension
          point="com.opcoach.training.rental.ui.Palette">
       <palette
-            id="com.opcoach.training.rental.ui.nonePalette"
+            paletteClass="com.opcoach.training.rental.ui.palette.NonePalette"
             name="Default"
-            paletteClass="com.opcoach.training.rental.ui.palette.NonePalette">
+            id="com.opcoach.training.rental.ui.nonePalette">
       </palette>
       <palette
-            id="com.opcoach.training.rental.ui.paletteJaune"
+            paletteClass="com.opcoach.training.rental.ui.palette.PaletteJaune"
             name="Jaune"
-            paletteClass="com.opcoach.training.rental.ui.palette.PaletteJaune">
+            id="com.opcoach.training.rental.ui.paletteJaune">
       </palette>
    </extension>
-   
+   <extension
+         id="com.opcoach.training.rental.ui.fragment"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            uri="fragment.e4xmi">
+      </fragment>
+   </extension>
 
 </plugin>
